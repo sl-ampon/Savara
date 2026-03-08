@@ -7,14 +7,13 @@
 // image swap — no animation or canvas needed.
 // ─────────────────────────────────────────────────────
 
-// Tree stage images — place these PNGs in /public/trees/
-// Names: seed.png, sprout.png, small.png, blooming.png, full.png
+// Tree stage images — SVGs stored in /public/trees/
 const STAGES = [
-  { min: 0,    label: 'Seed 🌱',           image: '/trees/seed.png'     },
-  { min: 0.25, label: 'Sprout 🌿',         image: '/trees/sprout.png'   },
-  { min: 0.50, label: 'Small Tree 🌳',     image: '/trees/small.png'    },
-  { min: 0.75, label: 'Blooming Tree 🌸',  image: '/trees/blooming.png' },
-  { min: 1.00, label: 'Full Sakura 🌸🌸', image: '/trees/full.png'     },
+  { min: 0,    label: 'Seed 🌱',           image: '/trees/seed.svg'     },
+  { min: 0.25, label: 'Sprout 🌿',         image: '/trees/sprout.svg'   },
+  { min: 0.50, label: 'Small Tree 🌳',     image: '/trees/small.svg'    },
+  { min: 0.75, label: 'Blooming Tree 🌸',  image: '/trees/blooming.svg' },
+  { min: 1.00, label: 'Full Sakura 🌸🌸', image: '/trees/full.svg'     },
 ]
 
 function getStage(progress) {

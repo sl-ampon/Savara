@@ -11,33 +11,23 @@ import {
   where,
   orderBy,
   getDocs,
-  doc,
-  getDoc,
 } from 'firebase/firestore'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { db } from '../firebase'
 import { useAuth } from '../context/AuthContext'
 
 export default function History() {
-  const { user }    = useAuth()
-  const navigate    = useNavigate()
+  const { goalId } = useParams()
+  const { user }   = useAuth()
+  const navigate   = useNavigate()
 
   const [contributions, setContributions] = useState([])
   const [loading, setLoading]             = useState(true)
 
   useEffect(() => {
-    if (!user) return
+    if (!user || !goalId) return
 
     async function load() {
-      // Get the user's active goal ID
-      const userSnap = await getDoc(doc(db, 'users', user.uid))
-      const goalId   = userSnap.data()?.activeGoalId
-
-      if (!goalId) {
-        setLoading(false)
-        return
-      }
-
       // Query all contributions for this goal, newest first
       const q    = query(
         collection(db, 'contributions'),
@@ -50,7 +40,7 @@ export default function History() {
     }
 
     load()
-  }, [user])
+  }, [user, goalId])
 
   function formatDate(timestamp) {
     if (!timestamp) return ''
@@ -61,7 +51,7 @@ export default function History() {
   return (
     <div className="min-h-screen px-4 py-8 max-w-sm mx-auto">
       <button
-        onClick={() => navigate('/')}
+        onClick={() => navigate(`/goal/${goalId}`)}
         className="text-sm text-gray-400 hover:text-gray-600 mb-6 block"
       >
         ← Back

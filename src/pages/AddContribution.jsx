@@ -1,12 +1,7 @@
 // src/pages/AddContribution.jsx
 // ─────────────────────────────────────────────────────
-// Form to log a new money contribution to the active goal.
-//
-// What it does:
-//  1. Reads the user's activeGoalId
-//  2. Adds a document to the "contributions" collection
-//  3. Increments currentAmount on the goal using Firestore increment()
-//     (safe for two partners writing at the same time)
+// Form to log a new money contribution to a specific goal.
+// goalId comes from the URL: /goal/:goalId/contribute
 // ─────────────────────────────────────────────────────
 
 import { useState } from 'react'
@@ -14,18 +9,18 @@ import {
   collection,
   addDoc,
   doc,
-  getDoc,
   updateDoc,
   increment,
   serverTimestamp,
 } from 'firebase/firestore'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { db } from '../firebase'
 import { useAuth } from '../context/AuthContext'
 
 export default function AddContribution() {
-  const { user }  = useAuth()
-  const navigate  = useNavigate()
+  const { goalId } = useParams()
+  const { user }   = useAuth()
+  const navigate   = useNavigate()
 
   const [amount,  setAmount]  = useState('')
   const [message, setMessage] = useState('')
@@ -45,17 +40,7 @@ export default function AddContribution() {
     }
 
     try {
-      // 1. Get the user's active goal ID
-      const userSnap  = await getDoc(doc(db, 'users', user.uid))
-      const goalId    = userSnap.data()?.activeGoalId
-
-      if (!goalId) {
-        setError("You don't have an active goal yet.")
-        setLoading(false)
-        return
-      }
-
-      // 2. Add the contribution document
+      // 1. Add the contribution document
       await addDoc(collection(db, 'contributions'), {
         goalId,
         userId:    user.uid,
@@ -65,13 +50,12 @@ export default function AddContribution() {
         createdAt: serverTimestamp(),
       })
 
-      // 3. Atomically increment currentAmount on the goal
-      //    increment() is safe when two users write at the same time
+      // 2. Atomically increment currentAmount on the goal
       await updateDoc(doc(db, 'goals', goalId), {
         currentAmount: increment(value),
       })
 
-      navigate('/')
+      navigate(`/goal/${goalId}`)
     } catch (err) {
       setError('Something went wrong. Please try again.')
       console.error(err)
@@ -83,7 +67,7 @@ export default function AddContribution() {
   return (
     <div className="min-h-screen px-4 py-8 max-w-sm mx-auto">
       <button
-        onClick={() => navigate('/')}
+        onClick={() => navigate(`/goal/${goalId}`)}
         className="text-sm text-gray-400 hover:text-gray-600 mb-6 block"
       >
         ← Back

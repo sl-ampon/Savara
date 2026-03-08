@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none">
+  <!-- Soil mound -->
+  <ellipse cx="60" cy="118" rx="38" ry="10" fill="#c8a97a" opacity="0.5"/>
+  <!-- Seed body -->
+  <ellipse cx="60" cy="100" rx="18" ry="22" fill="#8B5E3C"/>
+  <!-- Seed shine -->
+  <ellipse cx="53" cy="90" rx="5" ry="7" fill="#a87a52" opacity="0.6"/>
+  <!-- Tiny crack that hints at life -->
+  <path d="M60 80 Q63 73 60 66" stroke="#5a3a1a" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M60 66 Q56 60 59 54" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Tiny leaf hint -->
+  <ellipse cx="57" cy="52" rx="4" ry="6" fill="#6aab7a" transform="rotate(-20 57 52)"/>
+</svg>

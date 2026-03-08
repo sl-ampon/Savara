@@ -16,6 +16,8 @@ import Dashboard       from './pages/Dashboard'
 import CreateGoal      from './pages/CreateGoal'
 import AddContribution from './pages/AddContribution'
 import History         from './pages/History'
+import JoinGoal        from './pages/JoinGoal'
+import GoalDetail      from './pages/GoalDetail'
 
 // PrivateRoute: only renders children when the user is logged in.
 // While Firebase is still figuring out the auth state, shows a blank screen
@@ -43,10 +45,12 @@ export default function App() {
           <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
 
           {/* App pages — only accessible when logged IN */}
-          <Route path="/"                  element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-          <Route path="/create-goal"       element={<PrivateRoute><CreateGoal /></PrivateRoute>} />
-          <Route path="/add-contribution"  element={<PrivateRoute><AddContribution /></PrivateRoute>} />
-          <Route path="/history"           element={<PrivateRoute><History /></PrivateRoute>} />
+          <Route path="/"                           element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          <Route path="/create-goal"                element={<PrivateRoute><CreateGoal /></PrivateRoute>} />
+          <Route path="/join"                       element={<PrivateRoute><JoinGoal /></PrivateRoute>} />
+          <Route path="/goal/:goalId"               element={<PrivateRoute><GoalDetail /></PrivateRoute>} />
+          <Route path="/goal/:goalId/contribute"    element={<PrivateRoute><AddContribution /></PrivateRoute>} />
+          <Route path="/goal/:goalId/history"       element={<PrivateRoute><History /></PrivateRoute>} />
 
           {/* Fallback: unknown URLs go to Dashboard */}
           <Route path="*" element={<Navigate to="/" replace />} />

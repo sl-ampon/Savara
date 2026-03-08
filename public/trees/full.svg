@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 250" fill="none">
+  <!-- Soil mound -->
+  <ellipse cx="110" cy="232" rx="68" ry="14" fill="#c8a97a" opacity="0.5"/>
+  <!-- Trunk -->
+  <path d="M110 228 Q103 192 106 152" stroke="#7a5230" stroke-width="15" stroke-linecap="round"/>
+  <!-- Trunk texture lines -->
+  <path d="M105 210 Q99 200 102 190" stroke="#5a3a18" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+  <path d="M113 202 Q118 194 115 184" stroke="#5a3a18" stroke-width="2"   stroke-linecap="round" opacity="0.3"/>
+  <!-- Far-left branch -->
+  <path d="M106 172 Q74 158  44 138" stroke="#7a5230" stroke-width="8" stroke-linecap="round"/>
+  <!-- Left branch -->
+  <path d="M107 162 Q82  148  62 130" stroke="#8a6240" stroke-width="7" stroke-linecap="round"/>
+  <!-- Right branch -->
+  <path d="M108 158 Q136 144 158 126" stroke="#8a6240" stroke-width="7" stroke-linecap="round"/>
+  <!-- Far-right branch -->
+  <path d="M109 168 Q143 155 172 138" stroke="#7a5230" stroke-width="8" stroke-linecap="round"/>
+  <!-- Center branch -->
+  <path d="M108 154 Q112 132  110 112" stroke="#7a5230" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Sky-fill blossom base -->
+  <ellipse cx="110" cy="90" rx="88" ry="70" fill="#fce8f0" opacity="0.55"/>
+
+  <!-- Dense blossom clusters -->
+  <circle cx="110" cy="62"  r="42" fill="#fddde8" opacity="0.9"/>
+  <circle cx="64"  cy="88"  r="36" fill="#f9b8ce" opacity="0.88"/>
+  <circle cx="156" cy="84"  r="36" fill="#f4a8c2" opacity="0.85"/>
+  <circle cx="88"  cy="58"  r="28" fill="#f9c8d8" opacity="0.9"/>
+  <circle cx="132" cy="55"  r="28" fill="#f9b0ca" opacity="0.88"/>
+  <circle cx="40"  cy="108" r="26" fill="#f4c6d6" opacity="0.8"/>
+  <circle cx="180" cy="104" r="26" fill="#f9a8c2" opacity="0.8"/>
+  <circle cx="110" cy="44"  r="24" fill="#fff0f5" opacity="0.95"/>
+
+  <!-- Individual sakura flowers (5-petal style) -->
+  <!-- Flower 1 -->
+  <circle cx="90"  cy="46" r="5" fill="#fff" opacity="0.9"/>
+  <circle cx="84"  cy="50" r="4" fill="#fce4ee" opacity="0.85"/>
+  <circle cx="96"  cy="50" r="4" fill="#fce4ee" opacity="0.85"/>
+  <circle cx="86"  cy="56" r="4" fill="#fce4ee" opacity="0.85"/>
+  <circle cx="94"  cy="56" r="4" fill="#fce4ee" opacity="0.85"/>
+  <circle cx="90"  cy="51" r="3" fill="#f9a8c2"/>
+  <!-- Flower 2 -->
+  <circle cx="130" cy="42" r="5" fill="#fff" opacity="0.9"/>
+  <circle cx="124" cy="46" r="4" fill="#fce4ee" opacity="0.85"/>
+  <circle cx="136" cy="46" r="4" fill="#fce4ee" opacity="0.85"/>
+  <circle cx="126" cy="52" r="4" fill="#fce4ee" opacity="0.85"/>
+  <circle cx="134" cy="52" r="4" fill="#fce4ee" opacity="0.85"/>
+  <circle cx="130" cy="47" r="3" fill="#f9a8c2"/>
+  <!-- Flower 3 -->
+  <circle cx="58"  cy="98" r="5" fill="#fff" opacity="0.9"/>
+  <circle cx="52"  cy="102" r="4" fill="#fce4ee" opacity="0.85"/>
+  <circle cx="64"  cy="102" r="4" fill="#fce4ee" opacity="0.85"/>
+  <circle cx="54"  cy="108" r="4" fill="#fce4ee" opacity="0.85"/>
+  <circle cx="62"  cy="108" r="4" fill="#fce4ee" opacity="0.85"/>
+  <circle cx="58"  cy="103" r="3" fill="#f9a8c2"/>
+
+  <!-- Falling petals -->
+  <ellipse cx="22"  cy="128" rx="5" ry="3" fill="#f9b8ce" opacity="0.7"  transform="rotate(-35 22 128)"/>
+  <ellipse cx="198" cy="118" rx="5" ry="3" fill="#fddde8" opacity="0.65" transform="rotate(25 198 118)"/>
+  <ellipse cx="34"  cy="158" rx="4" ry="3" fill="#f4c6d6" opacity="0.6"  transform="rotate(10 34 158)"/>
+  <ellipse cx="188" cy="150" rx="4" ry="3" fill="#f9a8c2" opacity="0.55" transform="rotate(-20 188 150)"/>
+  <ellipse cx="52"  cy="172" rx="4" ry="2.5" fill="#fce4ee" opacity="0.5" transform="rotate(40 52 172)"/>
+  <ellipse cx="170" cy="168" rx="4" ry="2.5" fill="#f9c8d8" opacity="0.5" transform="rotate(-10 170 168)"/>
+  <ellipse cx="14"  cy="96"  rx="3.5" ry="2" fill="#f9b8ce" opacity="0.45" transform="rotate(-25 14 96)"/>
+  <ellipse cx="208" cy="88"  rx="3.5" ry="2" fill="#fddde8" opacity="0.45" transform="rotate(30 208 88)"/>
+</svg>

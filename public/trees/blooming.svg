@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 230" fill="none">
+  <!-- Soil mound -->
+  <ellipse cx="100" cy="212" rx="60" ry="14" fill="#c8a97a" opacity="0.5"/>
+  <!-- Trunk -->
+  <path d="M100 208 Q94 175 97 140" stroke="#7a5230" stroke-width="13" stroke-linecap="round"/>
+  <!-- Lower trunk texture -->
+  <path d="M96 195 Q90 188 93 178" stroke="#5a3a18" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <!-- Left branch -->
+  <path d="M97 158 Q70 145 48 128" stroke="#7a5230" stroke-width="7" stroke-linecap="round"/>
+  <!-- Right branch -->
+  <path d="M98 150 Q128 138 152 122" stroke="#8a6240" stroke-width="7" stroke-linecap="round"/>
+  <!-- Center branch up -->
+  <path d="M99 144 Q102 125 100 108" stroke="#7a5230" stroke-width="6" stroke-linecap="round"/>
+  <!-- Blossom clouds — layered for depth -->
+  <ellipse cx="100" cy="88" rx="70" ry="56" fill="#f9c8d8" opacity="0.6"/>
+  <circle cx="58"  cy="105" r="32" fill="#f4a8c2" opacity="0.85"/>
+  <circle cx="142" cy="100" r="30" fill="#f9b8ce" opacity="0.80"/>
+  <circle cx="100" cy="74"  r="34" fill="#fddde8" opacity="0.90"/>
+  <circle cx="72"  cy="72"  r="22" fill="#f9a8c2" opacity="0.80"/>
+  <circle cx="128" cy="68"  r="22" fill="#f4c6d6" opacity="0.75"/>
+  <!-- Floating petals -->
+  <ellipse cx="28"  cy="120" rx="5" ry="3" fill="#f9b8ce" opacity="0.7" transform="rotate(-30 28 120)"/>
+  <ellipse cx="170" cy="112" rx="5" ry="3" fill="#fddde8" opacity="0.65" transform="rotate(20 170 112)"/>
+  <ellipse cx="42"  cy="148" rx="4" ry="3" fill="#f4c6d6" opacity="0.55" transform="rotate(10 42 148)"/>
+  <ellipse cx="160" cy="140" rx="4" ry="3" fill="#f9a8c2" opacity="0.6"  transform="rotate(-15 160 140)"/>
+</svg>

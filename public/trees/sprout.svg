@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160" fill="none">
+  <!-- Soil mound -->
+  <ellipse cx="60" cy="138" rx="38" ry="10" fill="#c8a97a" opacity="0.5"/>
+  <!-- Stem -->
+  <path d="M60 130 Q58 105 60 80" stroke="#5a8a4a" stroke-width="4" stroke-linecap="round"/>
+  <!-- Left leaf -->
+  <ellipse cx="44" cy="100" rx="16" ry="8" fill="#6aab5a" transform="rotate(-35 44 100)"/>
+  <!-- Left leaf vein -->
+  <path d="M55 107 Q49 101 40 96" stroke="#4a8a3a" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+  <!-- Right leaf -->
+  <ellipse cx="76" cy="96" rx="16" ry="8" fill="#7ec46a" transform="rotate(35 76 96)"/>
+  <!-- Right leaf vein -->
+  <path d="M65 103 Q71 97 79 94" stroke="#4a8a3a" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+  <!-- Top bud -->
+  <ellipse cx="60" cy="76" rx="8" ry="10" fill="#f9a8c2"/>
+  <ellipse cx="60" cy="72" rx="5" ry="6" fill="#f4c6d6"/>
+</svg>

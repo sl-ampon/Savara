@@ -10,7 +10,7 @@
 // ─────────────────────────────────────────────────────
 
 import { useState } from 'react'
-import { collection, addDoc, doc, updateDoc, serverTimestamp } from 'firebase/firestore'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { db } from '../firebase'
 import { useAuth } from '../context/AuthContext'
@@ -43,7 +43,7 @@ export default function CreateGoal() {
     }
 
     try {
-      // 1. Create the goal document in Firestore
+      // Create the goal document in Firestore
       const goalRef = await addDoc(collection(db, 'goals'), {
         title,
         targetAmount,
@@ -55,12 +55,7 @@ export default function CreateGoal() {
         createdAt:             serverTimestamp(),
       })
 
-      // 2. Link the user to this goal
-      await updateDoc(doc(db, 'users', user.uid), {
-        activeGoalId: goalRef.id,
-      })
-
-      navigate('/')
+      navigate(`/goal/${goalRef.id}`)
     } catch (err) {
       setError('Something went wrong. Please try again.')
       console.error(err)
