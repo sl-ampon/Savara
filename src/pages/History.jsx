@@ -80,7 +80,9 @@ export default function History() {
             <li key={c.id} className="bg-white rounded-2xl border border-sakura-100 shadow-sm px-4 py-3">
               <div className="flex items-center justify-between">
                 <span className="font-semibold text-gray-700 text-sm">{c.userName}</span>
-                <span className="text-sakura-500 font-bold">+₱{c.amount.toLocaleString()}</span>
+                <span className={`font-bold ${c.amount < 0 ? 'text-red-400' : 'text-sakura-500'}`}>
+                  {c.amount < 0 ? `-₱${Math.abs(c.amount).toLocaleString()}` : `+₱${c.amount.toLocaleString()}`}
+                </span>
               </div>
               {c.message && (
                 <p className="text-xs text-gray-500 mt-1 italic">"{c.message}"</p>

@@ -12,7 +12,7 @@
 // ─────────────────────────────────────────────────────
 
 import { useEffect, useState } from 'react'
-import { doc, onSnapshot, collection, query, where, getDocs } from 'firebase/firestore'
+import { doc, onSnapshot, collection, query, where, getDocs, writeBatch } from 'firebase/firestore'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { db } from '../firebase'
 import { useAuth } from '../context/AuthContext'
@@ -26,6 +26,8 @@ export default function GoalDetail() {
   const [goal,          setGoal]          = useState(null)
   const [contributions, setContributions] = useState([])
   const [loading,       setLoading]       = useState(true)
+  const [confirmDelete, setConfirmDelete] = useState(false)
+  const [deleting,      setDeleting]      = useState(false)
 
   useEffect(() => {
     if (!goalId) return
@@ -54,6 +56,29 @@ export default function GoalDetail() {
     return () => unsubGoal()
   }, [goalId])
 
+  async function handleDelete() {
+    setDeleting(true)
+    try {
+      // Use a batch to delete the goal + all its contributions atomically
+      const batch = writeBatch(db)
+
+      // Delete all contributions for this goal
+      const q    = query(collection(db, 'contributions'), where('goalId', '==', goalId))
+      const snap = await getDocs(q)
+      snap.docs.forEach((d) => batch.delete(d.ref))
+
+      // Delete the goal itself
+      batch.delete(doc(db, 'goals', goalId))
+
+      await batch.commit()
+      navigate('/')
+    } catch (err) {
+      console.error('Failed to delete goal:', err)
+      setDeleting(false)
+      setConfirmDelete(false)
+    }
+  }
+
   function formatDate(timestamp) {
     if (!timestamp) return ''
     return timestamp.toDate().toLocaleDateString('en-PH', {
@@ -80,13 +105,40 @@ export default function GoalDetail() {
 
   return (
     <div className="min-h-screen px-4 py-8 max-w-sm mx-auto space-y-5">
-      {/* Back */}
-      <button
-        onClick={() => navigate('/')}
-        className="text-sm text-gray-400 hover:text-gray-600"
-      >
-        ← All goals
-      </button>
+      {/* Back + Delete */}
+      <div className="flex items-center justify-between">
+        <button
+          onClick={() => navigate('/')}
+          className="text-sm text-gray-400 hover:text-gray-600"
+        >
+          ← All goals
+        </button>
+        {!confirmDelete ? (
+          <button
+            onClick={() => setConfirmDelete(true)}
+            className="text-xs text-red-400 hover:text-red-500 transition"
+          >
+            Delete goal
+          </button>
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-gray-500">Are you sure?</span>
+            <button
+              onClick={handleDelete}
+              disabled={deleting}
+              className="text-xs bg-red-500 hover:bg-red-400 text-white px-3 py-1 rounded-lg transition disabled:opacity-60"
+            >
+              {deleting ? 'Deleting…' : 'Yes, delete'}
+            </button>
+            <button
+              onClick={() => setConfirmDelete(false)}
+              className="text-xs text-gray-400 hover:text-gray-600"
+            >
+              Cancel
+            </button>
+          </div>
+        )}
+      </div>
 
       {/* Goal title */}
       <div className="bg-white rounded-2xl border border-sakura-100 shadow-sm p-5">
@@ -145,6 +197,14 @@ export default function GoalDetail() {
         </Link>
       </div>
 
+      {/* Withdraw button */}
+      <Link
+        to={`/goal/${goalId}/contribute?type=withdraw`}
+        className="block w-full text-center py-2.5 rounded-xl font-semibold text-sm border border-red-100 text-red-400 hover:bg-red-50 transition"
+      >
+        - Withdraw money
+      </Link>
+
       {/* Recent contributions */}
       {contributions.length > 0 && (
         <div className="bg-white rounded-2xl border border-sakura-100 shadow-sm p-5 space-y-3">
@@ -159,8 +219,8 @@ export default function GoalDetail() {
                   )}
                   <p className="text-xs text-gray-400">{formatDate(c.createdAt)}</p>
                 </div>
-                <span className="text-sakura-500 font-bold text-sm flex-shrink-0">
-                  +₱{c.amount.toLocaleString()}
+                <span className={`font-bold text-sm flex-shrink-0 ${c.amount < 0 ? 'text-red-400' : 'text-sakura-500'}`}>
+                  {c.amount < 0 ? `-₱${Math.abs(c.amount).toLocaleString()}` : `+₱${c.amount.toLocaleString()}`}
                 </span>
               </li>
             ))}
