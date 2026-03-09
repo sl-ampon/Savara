@@ -9,7 +9,6 @@ import {
   collection,
   query,
   where,
-  orderBy,
   getDocs,
 } from 'firebase/firestore'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -28,15 +27,23 @@ export default function History() {
     if (!user || !goalId) return
 
     async function load() {
-      // Query all contributions for this goal, newest first
-      const q    = query(
-        collection(db, 'contributions'),
-        where('goalId', '==', goalId),
-        orderBy('createdAt', 'desc')
-      )
-      const snap = await getDocs(q)
-      setContributions(snap.docs.map((d) => ({ id: d.id, ...d.data() })))
-      setLoading(false)
+      try {
+        // Query contributions for this goal — sort client-side to avoid
+        // needing a Firestore composite index on (goalId + createdAt)
+        const q    = query(
+          collection(db, 'contributions'),
+          where('goalId', '==', goalId)
+        )
+        const snap = await getDocs(q)
+        const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+        // Sort newest first in JavaScript
+        list.sort((a, b) => (b.createdAt?.seconds ?? 0) - (a.createdAt?.seconds ?? 0))
+        setContributions(list)
+      } catch (err) {
+        console.error('Failed to load contributions:', err)
+      } finally {
+        setLoading(false)
+      }
     }
 
     load()

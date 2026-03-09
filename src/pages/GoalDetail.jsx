@@ -12,7 +12,7 @@
 // ─────────────────────────────────────────────────────
 
 import { useEffect, useState } from 'react'
-import { doc, onSnapshot, collection, query, where, orderBy, limit, getDocs } from 'firebase/firestore'
+import { doc, onSnapshot, collection, query, where, getDocs } from 'firebase/firestore'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { db } from '../firebase'
 import { useAuth } from '../context/AuthContext'
@@ -42,12 +42,12 @@ export default function GoalDetail() {
     async function loadRecent() {
       const q    = query(
         collection(db, 'contributions'),
-        where('goalId', '==', goalId),
-        orderBy('createdAt', 'desc'),
-        limit(5)
+        where('goalId', '==', goalId)
       )
       const snap = await getDocs(q)
-      setContributions(snap.docs.map((d) => ({ id: d.id, ...d.data() })))
+      const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+      list.sort((a, b) => (b.createdAt?.seconds ?? 0) - (a.createdAt?.seconds ?? 0))
+      setContributions(list.slice(0, 5))
     }
 
     loadRecent()
